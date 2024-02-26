@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Shopping List</string>
+    <string name="sample_text">Sample text</string>
+    <string name="add_an_item">Add an item</string>
+    <string name="clear_all_items">Clear all items</string>
+    <string name="add_item">Add item</string>
+    <string name="dialog_name">Name:</string>
+    <string name="dialog_number">Number:</string>
+    <string name="dialog_price">Price:</string>
+    <string name="edit_item">Edit item</string>
+    <string name="dialog_clear_all_items">Clear all items?</string>
+    <string name="delete_item">Delete item?</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+</resources>

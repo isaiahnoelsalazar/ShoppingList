@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:layout_marginTop="8dp"
+        android:gravity="center_vertical"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:text="@string/add_item"
+        android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        tools:ignore="TextSizeCheck" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="20dp"
+            android:paddingStart="24dp"
+            android:text="@string/dialog_name"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edit_text_shpl_add_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="Text"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="text"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            tools:ignore="LabelFor,VisualLintTextFieldSize,SpeakableTextPresentCheck"  />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="20dp"
+            android:paddingStart="24dp"
+            android:text="@string/dialog_number"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edit_text_shpl_add_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="Text"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="number"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            tools:ignore="LabelFor,VisualLintTextFieldSize,SpeakableTextPresentCheck"  />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="20dp"
+            android:paddingStart="24dp"
+            android:text="@string/dialog_price"
+            android:textColor="@color/black" />
+
+        <EditText
+            android:id="@+id/edit_text_shpl_add_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:autofillHints="Text"
+            android:background="@drawable/edit_text_bg"
+            android:inputType="numberDecimal"
+            android:paddingStart="16dp"
+            android:paddingTop="12dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="12dp"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            tools:ignore="LabelFor,VisualLintTextFieldSize,SpeakableTextPresentCheck"  />
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:paddingTop="12dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel_shpl_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/button_bg"
+            android:stateListAnimator="@null"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/done_shpl_add"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/done_shpl_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:stateListAnimator="@null"
+            android:text="@string/done"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
