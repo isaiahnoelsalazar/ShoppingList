@@ -3,6 +3,7 @@ package com.salazarisaiahnoel.shoppinglist;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.salazarisaiahnoel.shoppinglist.adapters.ShoppingListAdapter;
 import com.salazarisaiahnoel.shoppinglist.data.ShoppingListData;
 
@@ -43,10 +45,62 @@ public class MainActivity extends AppCompatActivity implements ShoppingListAdapt
         setContentView(R.layout.activity_main);
 
         sd = new ShoppingListData(this);
+        Toolbar t = findViewById(R.id.toolbar);
+        setSupportActionBar(t);
 
         rv = findViewById(R.id.recycler_view_shpl);
         llm = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(llm);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View vview) {
+                LayoutInflater li = LayoutInflater.from(MainActivity.this);
+                View v = li.inflate(R.layout.shpl_add_data, null);
+                final EditText et = v.findViewById(R.id.edit_text_shpl_add_name);
+                final EditText et1 = v.findViewById(R.id.edit_text_shpl_add_number);
+                final EditText et2 = v.findViewById(R.id.edit_text_shpl_add_price);
+                final Button b = v.findViewById(R.id.done_shpl_add);
+                final Button b1 = v.findViewById(R.id.cancel_shpl_add);
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainActivity.this)
+                        .setView(v);
+                AlertDialog ad = adb.create();
+                Objects.requireNonNull(ad.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                ad.show();
+                b.setOnClickListener(v1 -> {
+                    if (TextUtils.isEmpty(et.getText().toString()) || TextUtils.isEmpty(et1.getText().toString()) || TextUtils.isEmpty(et2.getText().toString())){
+                        if (TextUtils.isEmpty(et.getText().toString())){
+                            et.setError("Cannot be empty.");
+                        }
+                        if (TextUtils.isEmpty(et1.getText().toString())){
+                            et1.setError("Cannot be empty.");
+                        }
+                        if (TextUtils.isEmpty(et2.getText().toString())){
+                            et2.setError("Cannot be empty.");
+                        }
+                    } else {
+                        sd.addData(et.getText().toString(), et1.getText().toString(), et2.getText().toString());
+                        sd.rearrangePosition();
+                        refreshData();
+                        ad.cancel();
+                    }
+                });
+                b1.setOnClickListener(v2 -> ad.cancel());
+            }
+        });
+
+        rv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                if (dy > 0){
+                    fab.hide();
+                } else {
+                    fab.show();
+                }
+            }
+        });
 
         refreshData();
     }
@@ -65,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements ShoppingListAdapt
         }
 
         name.add(0, "Name");
-        number.add(0, "Number");
+        number.add(0, "Quantity");
         price.add(0, "Price");
 
         name.add("Total");
@@ -84,39 +138,6 @@ public class MainActivity extends AppCompatActivity implements ShoppingListAdapt
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.shpl_add){
-            LayoutInflater li = LayoutInflater.from(this);
-            View v = li.inflate(R.layout.shpl_add_data, null);
-            final EditText et = v.findViewById(R.id.edit_text_shpl_add_name);
-            final EditText et1 = v.findViewById(R.id.edit_text_shpl_add_number);
-            final EditText et2 = v.findViewById(R.id.edit_text_shpl_add_price);
-            final Button b = v.findViewById(R.id.done_shpl_add);
-            final Button b1 = v.findViewById(R.id.cancel_shpl_add);
-            AlertDialog.Builder adb = new AlertDialog.Builder(this)
-                    .setView(v);
-            AlertDialog ad = adb.create();
-            Objects.requireNonNull(ad.getWindow()).setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            ad.show();
-            b.setOnClickListener(v1 -> {
-                if (TextUtils.isEmpty(et.getText().toString()) || TextUtils.isEmpty(et1.getText().toString()) || TextUtils.isEmpty(et2.getText().toString())){
-                    if (TextUtils.isEmpty(et.getText().toString())){
-                        et.setError("Cannot be empty.");
-                    }
-                    if (TextUtils.isEmpty(et1.getText().toString())){
-                        et1.setError("Cannot be empty.");
-                    }
-                    if (TextUtils.isEmpty(et2.getText().toString())){
-                        et2.setError("Cannot be empty.");
-                    }
-                } else {
-                    sd.addData(et.getText().toString(), et1.getText().toString(), et2.getText().toString());
-                    sd.rearrangePosition();
-                    refreshData();
-                    ad.cancel();
-                }
-            });
-            b1.setOnClickListener(v2 -> ad.cancel());
-        }
         if (item.getItemId() == R.id.shpl_clear){
             LayoutInflater li = LayoutInflater.from(this);
             View v = li.inflate(R.layout.shpl_clear_data, null);
